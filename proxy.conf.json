@@ -8,12 +8,13 @@
         "^/api": ""
       }
     },
-    "/candy/*": {
-      "target": "http://localhost:5000/",
+    "/fmp/*": {
+      "target": "http://localhost:30003/",
       "secure": true,
       "changeOrigin": true,
       "pathRewrite": {
-        "^/api": ""
+        "^/fmp": ""
       }
     }
+
   }

@@ -46,4 +46,15 @@ export class ApicallService {
     var instanceUrl = this.getInstanceUrl(PartitionId);
     return this.http.get<any>(instanceUrl);
    }   
+
+   FetchMigrationProgress(){
+
+    var URL = "http://localhost:4200/fmp/e7fa8815-da19-469c-8d29-5741aa82fbf3/133017804768490073/2eea2f23-c342-4997-8ec2-77b331103c15/RcMigration/GetMigrationStatus";
+    return this.http.get<any>(URL);
+   }
+
+   startMigration(migrationList){
+
+    return this.http.put<any>( migrationList+"/RcMigration/StartMigration", {});
+   }
 }

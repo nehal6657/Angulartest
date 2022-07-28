@@ -19,3 +19,17 @@ helllo
     </li>
 </ul>
 
+<div class="form-group">
+    <label for="options">Options:</label>
+    <div *ngFor="let option of options">
+        <label>
+            <input type="checkbox"
+                   value="{{option.value}}"
+                   [(ngModel)]="option.checked"
+                   (change)="getselectedOptions()"/>
+            {{option.name}}
+        </label>
+    </div>
+    <button (click)="startMig()"> Start mig</button>
+</div>
+

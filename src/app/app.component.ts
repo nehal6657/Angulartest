@@ -24,12 +24,35 @@ export class AppComponent {
   services: service;
   partition: Partition;
   instance: Instance;
+  options = [
+    {name:'OptionA', value:'1', checked:true},
+    {name:'OptionB', value:'2', checked:false},
+    {name:'OptionC', value:'3', checked:true}
+  ]
+
+  getselectedOptions() { // right now: ['1','3']
+    console.log(this.options
+      .filter(opt => opt.checked)
+      .map(opt => opt.value));
+    return this.options
+              .filter(opt => opt.checked)
+              .map(opt => opt.value);
+  }
 
   constructor(private userData: ApicallService, 
               private route: ActivatedRoute){
     this.getAllApplications();
-  }
 
+    userData.FetchMigrationProgress().subscribe(
+      resp => {
+        
+        console.warn(resp);
+      }
+    )
+  }
+  ngOnint(){
+
+  }
   getAllApplications(){
     this.userData.getAllApplications().subscribe(
       resp=> {
@@ -38,9 +61,8 @@ export class AppComponent {
           this.listApplications.push(this.applications.Items[item].Id);
           this.getAllServices(this.applications.Items[item].Id);
         }
-        console.log(this.listApplications);
 
-       
+       this.getselectedOptions();
       }
     )
     
@@ -55,7 +77,7 @@ export class AppComponent {
           this.listServices.set(this.services.Items[item].Id, ApplicationId);
           this.getAllPartitions(this.services.Items[item].Id);
         }
-        console.log(this.listServices);
+        //console.log(this.listServices);
        
       }
     );
@@ -103,6 +125,16 @@ export class AppComponent {
   getKeys(map: Map<any, any>){
     return Array.from(map.values());
   }
+
+  startMig(){
+    console.log("starting migg");
+    this.userData.startMigration(this.MigrationListener).subscribe(
+      e=> {
+        console.log("11111"); console.log(e);
+      }
+    )
+  }
+  
 
 
 }

@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApicallService } from './services/apicall.service';
 import { CommonModule } from '@angular/common';
 import { TwoComponent } from './two/two.component';
+import { FormsModule } from '@angular/forms';
  
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TwoComponent } from './two/two.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   providers: [
     ApicallService
